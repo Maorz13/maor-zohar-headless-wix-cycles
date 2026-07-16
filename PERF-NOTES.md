@@ -27,8 +27,12 @@ Result (live Wix CDN): **mobile perf 68 → 83, LCP 5.9s → 3.1s**, mobile weig
 
 > Note: Lighthouse against the live Wix host is **noisy** run-to-run (desktop has read 78 / 88 / 98 across runs) because of the Wix hosting wrapper's injected scripts + the desktop-only 5 MB GLB + network variance. Treat scores as a range, not a single point; the structural byte reductions are the durable win.
 
-## Remaining opportunity (low Lighthouse ROI)
-- `hero-bike.glb` (5 MB, desktop-only) loads *after* the LCP paints, so it inflates total bytes/TTI but barely affects the LCP-weighted perf score. Compressing it (draco/meshopt) would need matching `DRACOLoader`/`MeshoptDecoder` setup in `hero-model.tsx` — worthwhile for polish, not for the score.
+## Round 3 — GLB compression: attempted, reverted (kept original)
+Tried meshopt-compressing `hero-bike.glb` with `@gltf-transform/cli@4.4.0`:
+- Geometry-preserving (no simplification): 5.08 MB → 4.7 MB — only ~7%; the model is geometry-dominated (textures are small), so lossless compression barely helps.
+- With conservative simplification: 5.08 MB → 3.62 MB (~29%). But the meshopt-compressed GLB **froze the WebGL hero** in-browser — drei 10.7.7 `useGLTF(url)` did not decode the meshopt buffers cleanly without explicit `MeshoptDecoder`/WASM wiring, and the render hung.
+
+**Decision: reverted to the original 5 MB GLB.** The asset is desktop-only and loads *after* LCP, so it does not move the (LCP/TBT-weighted) Lighthouse score; the ~1.5 MB potential saving did not justify destabilizing the flagship 3D or adding a fragile decoder dependency. The compressed model was never released — the live site always had the original. If this is revisited, the correct approach is to wire `MeshoptDecoder` into the loader in `hero-model.tsx` (`useGLTF(url, true, true, loader => loader.setMeshoptDecoder(MeshoptDecoder))`) and visually verify the render before shipping.
 
 ## Earlier remaining mobile opportunity (now addressed by Round 2)
 Mobile LCP is ~5.9s. The heaviest remaining requests are several Unsplash section images at 180–342 KB, requested at `w=1200&h=900` (oversized for a ~390px phone). Because the export uses `images.unoptimized`, `next/image` emits no responsive `srcset`. Options for a follow-up round: request device-appropriate Unsplash sizes (smaller `w=` for mobile / add a srcset via the Unsplash URL params), confirm the actual mobile LCP element, and ensure below-the-fold section images are lazy. Also optional: draco/meshopt-compress `hero-bike.glb` (5 MB, desktop-only, loads after LCP so low priority).

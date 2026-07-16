@@ -117,3 +117,20 @@ caused by: TypeError: fetch failed
     at async <anonymous> (/Users/maorz/.npm/_npx/75dcc8e0e5613276/node_modules/node_modules/p-timeout/index.js:102:13)
 Error Info
 {}
+----- CLI crash report at 2026-07-16T13:24:41.348Z
+Error Trace
+FailedToFetchPackageDetails: FailedToFetchPackageDetails
+    at fetchPackageDetails (/Users/maorz/.local/share/fnm/node-versions/v24.13.0/installation/lib/node_modules/@wix/cli-version-manager/src/package-details-reader.ts:54:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async versionNotifier (/Users/maorz/.local/share/fnm/node-versions/v24.13.0/installation/lib/node_modules/@wix/cli-version-manager/src/version-notifier.tsx:8:26)
+    at async <anonymous> (/Users/maorz/.local/share/fnm/node-versions/v24.13.0/installation/lib/node_modules/@wix/cli/src/index.tsx:93:26)
+caused by: TypeError: fetch failed
+    at node:internal/deps/undici/undici:16416:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async function_ (/Users/maorz/.local/share/fnm/node-versions/v24.13.0/installation/lib/node_modules/node_modules/ky/source/core/Ky.ts:38:19)
+    at async _Ky._retry (/Users/maorz/.local/share/fnm/node-versions/v24.13.0/installation/lib/node_modules/node_modules/ky/source/core/Ky.ts:258:11)
+    at async Promise.result.<computed> (/Users/maorz/.local/share/fnm/node-versions/v24.13.0/installation/lib/node_modules/node_modules/ky/source/core/Ky.ts:91:22)
+    at async packageJson (/Users/maorz/.local/share/fnm/node-versions/v24.13.0/installation/lib/node_modules/node_modules/package-json/index.js:43:10)
+    at async <anonymous> (/Users/maorz/.local/share/fnm/node-versions/v24.13.0/installation/lib/node_modules/node_modules/p-timeout/index.js:102:13)
+Error Info
+{}

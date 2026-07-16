@@ -1,0 +1,65 @@
+----- CLI crash report at 2026-07-16T11:57:59.558Z
+Error Trace
+FailedToSetNamespace: FailedToSetNamespace
+    at DevCenterClient.setNamespace (/Users/maorz/.npm/_npx/167aff61dff8be4c/node_modules/@wix/dev-center-client/src/dev-center-client.ts:204:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async wrapped (/Users/maorz/.npm/_npx/167aff61dff8be4c/node_modules/@wix/cli-panorama/src/usePanoramaMethodLogger.ts:47:28)
+    at async <anonymous> (/Users/maorz/.npm/_npx/167aff61dff8be4c/node_modules/@wix/create-new-packages/headless-command/src/hooks/create-project.ts:52:7)
+caused by: Error: Request failed with status code 400
+    at createHttpError2 (/Users/maorz/.npm/_npx/167aff61dff8be4c/node_modules/node_modules/@wix/http-client/src/error.ts:54:10)
+    at HttpClientNode.handleRequestError (/Users/maorz/.npm/_npx/167aff61dff8be4c/node_modules/node_modules/@wix/http-client/src/http-client.ts:268:26)
+    at HttpClientNode.request (/Users/maorz/.npm/_npx/167aff61dff8be4c/node_modules/node_modules/@wix/http-client/src/http-client.ts:105:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async DevCenterClient.setNamespace (/Users/maorz/.npm/_npx/167aff61dff8be4c/node_modules/@wix/dev-center-client/src/dev-center-client.ts:187:24)
+    at async wrapped (/Users/maorz/.npm/_npx/167aff61dff8be4c/node_modules/@wix/cli-panorama/src/usePanoramaMethodLogger.ts:47:28)
+    at async <anonymous> (/Users/maorz/.npm/_npx/167aff61dff8be4c/node_modules/@wix/create-new-packages/headless-command/src/hooks/create-project.ts:52:7)
+Error Info
+{}
+Request Info
+{
+  "request": {
+    "baseURL": "https://manage.wix.com",
+    "url": "/apps-service/v1/apps/0741ff38-f8a8-4d32-9bef-c9aebd43b5b5/set-namespace",
+    "method": "patch",
+    "headers": {
+      "Accept": "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+      "X-XSRF-TOKEN": "nocheck",
+      "Cookie": "XSRF-TOKEN=nocheck",
+      "User-Agent": "wix-cli",
+      "authorization": "OauthNG.JWS.eyJraWQiOiJZSEJzdUpwSCIsImFsZyI6IkhTMjU2In0.eyJkYXRhIjoie1wiaW5zdGFuY2VcIjp7XCJpbnN0YW5jZUlkXCI6XCI2Zjk1Y2VjOC0zZTk4LTQ4YjktYjRlNS0xZmI5MmZjZDk5NzNcIixcImFwcERlZklkXCI6XCI2Zjk1Y2VjOC0zZTk4LTQ4YjktYjRlNS0xZmI5MmZjZDk5NzNcIixcInNpZ25EYXRlXCI6XCIyMDI2LTA3LTE2VDExOjU3OjU3Ljc2N1pcIixcInVpZFwiOlwiZDVlMDNkMjktMmMxZS00MTY4LWIxZjktMDg4N2E3YjQzOGRjXCIsXCJwZXJtaXNzaW9uc1wiOlwiXCIsXCJkZW1vTW9kZVwiOmZhbHNlLFwic2l0ZU93bmVySWRcIjpcImQ1ZTAzZDI5LTJjMWUtNDE2OC1iMWY5LTA4ODdhN2I0MzhkY1wiLFwibWV0YVNpdGVJZFwiOlwiMDc3YzZhMGUtYzUyYS00Y2MyLWFiNGYtODNkMjMxZDcyMzJhXCIsXCJleHBpcmF0aW9uRGF0ZVwiOlwiMjAyNi0wNy0xNlQxNTo1Nzo1Ny43NjdaXCIsXCJsb2dpbkFjY291bnRJZFwiOlwiZDVlMDNkMjktMmMxZS00MTY4LWIxZjktMDg4N2E3YjQzOGRjXCIsXCJhb3JcIjp0cnVlLFwic2NkXCI6XCIyMDI2LTA3LTE2VDExOjU3OjU2LjEyOVpcIixcImFjZFwiOlwiMjAyMS0wMS0xMVQxMDozMTo0NFpcIixcIndzXCI6dHJ1ZX19IiwiaWF0IjoxNzg0MjAzMDc3LCJleHAiOjE3ODQyMTc0Nzd9.2GhNU4IoCnGGZEv22G01gRsVQI6ojG9d70xrsOlb_74",
+      "Content-Length": 80
+    },
+    "data": "{\"appId\":\"0741ff38-f8a8-4d32-9bef-c9aebd43b5b5\",\"appName\":\"wix-headle-ed215903\"}"
+  },
+  "response": {
+    "message": "Request failed with status code 400",
+    "status": 400,
+    "headers": {
+      "date": "Thu, 16 Jul 2026 11:57:59 GMT",
+      "content-type": "application/json",
+      "content-length": "155",
+      "x-wix-responded-by": "wix.devcenter.apps.v1.app:SetNamespace:com.wixpress.devcenter.apps-service",
+      "x-seen-by": "yI4PPEXc3bvXNWfpzSkUarxkNjrXdwdgtu6E0yACibU=,Ua1iSBCTq7qSXjmRCGE1N2xVHC4kvpx5wgNckrZXMHoafmg26JBsTukrdDvd404rjZ0VXxXPnIMxXJ0uaI6Y4zmiOuN41Li9QWRNbY08/QQ=,S30xPaDk5EmV5qZoDf/jyvo0o6+ojdHyDbs9pvaX5xpNbXepcVKvzQ2PsFwRyk8lc1k2CXVZq1kOhJ7EzdYUXw==,yBmilgm1XmQYu6WIhKJLVdvK6LQLfm1jAyrW6mvNbMVYgeUJqUXtid+86vZww+nL",
+      "x-wix-request-id": "1784203079.4251967653711383",
+      "set-cookie": [
+        "XSRF-TOKEN=1784203079|LQRvEzvUU3OL; Path=/; Domain=.wix.com; Secure; SameSite=None"
+      ],
+      "x-robots-tag": "noindex",
+      "server": "Pepyaka",
+      "x-content-type-options": "nosniff",
+      "strict-transport-security": "max-age=120 ; includeSubDomains",
+      "via": "1.1 google",
+      "glb-x-seen-by": "wMMTADooq5AJ3cFomJ/MuXOQWGce7NCZXKms1ErOpBs=",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+    },
+    "data": {
+      "message": "The name of Non Wix App 'wix-headle-ed215903', should NOT contain 'wix' string",
+      "details": {
+        "applicationError": {
+          "code": "NonWixAppInvalidName"
+        }
+      }
+    }
+  }
+}

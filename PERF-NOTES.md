@@ -20,5 +20,15 @@ Page weight ~24–31 MB. Three hero PNGs at 2816px / 6.4–6.7 MB **each** serve
 
 (Best-practices reads 96 on live vs 100 locally — attributable to the Wix hosting wrapper's injected scripts, not app code.)
 
-## Remaining mobile opportunity (not yet done)
+## Round 2 — responsive images (commit cc133ab)
+Removed `images.unoptimized` and added a custom `next/image` loader (`lib/image-loader.ts`) that maps Unsplash sources to Unsplash's on-the-fly resizing, so `next/image` emits a real responsive `srcset` even under `output: "export"`. Phones now fetch ~340px section images instead of 1200px. Local WebP assets pass through unchanged.
+
+Result (live Wix CDN): **mobile perf 68 → 83, LCP 5.9s → 3.1s**, mobile weight ~2.2 MB. Desktop LCP ~1.0–1.9s.
+
+> Note: Lighthouse against the live Wix host is **noisy** run-to-run (desktop has read 78 / 88 / 98 across runs) because of the Wix hosting wrapper's injected scripts + the desktop-only 5 MB GLB + network variance. Treat scores as a range, not a single point; the structural byte reductions are the durable win.
+
+## Remaining opportunity (low Lighthouse ROI)
+- `hero-bike.glb` (5 MB, desktop-only) loads *after* the LCP paints, so it inflates total bytes/TTI but barely affects the LCP-weighted perf score. Compressing it (draco/meshopt) would need matching `DRACOLoader`/`MeshoptDecoder` setup in `hero-model.tsx` — worthwhile for polish, not for the score.
+
+## Earlier remaining mobile opportunity (now addressed by Round 2)
 Mobile LCP is ~5.9s. The heaviest remaining requests are several Unsplash section images at 180–342 KB, requested at `w=1200&h=900` (oversized for a ~390px phone). Because the export uses `images.unoptimized`, `next/image` emits no responsive `srcset`. Options for a follow-up round: request device-appropriate Unsplash sizes (smaller `w=` for mobile / add a srcset via the Unsplash URL params), confirm the actual mobile LCP element, and ensure below-the-fold section images are lazy. Also optional: draco/meshopt-compress `hero-bike.glb` (5 MB, desktop-only, loads after LCP so low priority).

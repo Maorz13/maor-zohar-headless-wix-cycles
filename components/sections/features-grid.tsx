@@ -41,7 +41,7 @@ export function FeaturesGrid() {
               middle, and built to shrug off seasons of abuse.
             </p>
             <a
-              href="#"
+              href="#compare"
               className="mt-10 inline-block bg-white px-8 py-3 text-[11px] font-bold uppercase tracking-[0.25em] text-ink transition-colors duration-300 hover:bg-turq hover:text-white"
             >
               Explore

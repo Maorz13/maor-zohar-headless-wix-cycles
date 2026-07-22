@@ -33,7 +33,7 @@ export function CarbonLayup() {
             frames carry a lifetime warranty because we expect them to outlast
             every part bolted to them.
           </p>
-          <a href="#" className="link-cta mt-10 inline-block text-white hover:text-turq">
+          <a href="#kits" className="link-cta mt-10 inline-block text-white hover:text-turq">
             Explore
           </a>
         </Reveal>
@@ -59,7 +59,7 @@ export function Reviews() {
   }, [emblaApi]);
 
   return (
-    <section className="bg-gray-light py-20 lg:py-28">
+    <section id="reviews" className="bg-gray-light py-20 lg:py-28">
       <div className="mx-auto max-w-[1440px] px-5 lg:px-10">
         <Reveal>
           <div ref={emblaRef} className="overflow-hidden">
@@ -76,7 +76,7 @@ export function Reviews() {
                     </em>
                     {review.post}&rdquo;
                   </p>
-                  <a href="#" className="link-cta mt-10 text-ink hover:text-turq">
+                  <a href="#reviews" className="link-cta mt-10 text-ink hover:text-turq">
                     Read More
                   </a>
                 </blockquote>

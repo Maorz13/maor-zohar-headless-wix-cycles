@@ -1,11 +1,11 @@
 {
   "production": {
-    "id": "ff3781dd-2b19-4d36-93a1-bbffff5e02b9",
+    "id": "612ca7b4-50d9-4392-bcd9-999aec93941f",
     "site": {
-      "main": "https://aree5z-headless-c-8725a605-maorz5.wix-site-host.com"
+      "main": "https://cxu5wg-headless-c-8725a605-maorz5.wix-site-host.com"
     },
     "dashboard": {
-      "main": "https://manage.wix.com/dashboard/1124bf16-cac7-4c4d-afca-9073ab89c298?apps-override=ff3781dd-2b19-4d36-93a1-bbffff5e02b9"
+      "main": "https://manage.wix.com/dashboard/1124bf16-cac7-4c4d-afca-9073ab89c298?apps-override=612ca7b4-50d9-4392-bcd9-999aec93941f"
     }
   }
 }

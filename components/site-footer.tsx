@@ -16,28 +16,50 @@ const SOCIAL_ICONS: { label: string; path: string }[] = [
   },
 ];
 
-const COLUMNS: { title: string; links: string[] }[] = [
+const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Explore",
-    links: ["Technology", "Special Projects", "Bike Setup", "Compare", "Demo"],
+    links: [
+      { label: "Technology", href: "#compare" },
+      { label: "Special Projects", href: "#reviews" },
+      { label: "Bike Setup", href: "#geometry" },
+      { label: "Compare", href: "#compare" },
+      { label: "Demo", href: "#kits" },
+    ],
   },
   {
     title: "Support",
-    links: ["Help Center", "Suspension Setup", "Manuals", "Warranty", "Bike Registration"],
+    links: [
+      { label: "Help Center", href: "#support" },
+      { label: "Suspension Setup", href: "#geometry" },
+      { label: "Manuals", href: "#geometry" },
+      { label: "Warranty", href: "#support" },
+      { label: "Bike Registration", href: "#support" },
+    ],
   },
   {
     title: "Company",
-    links: ["Pro Program", "Patents", "Contact Us", "Dealer Locator", "Careers"],
+    links: [
+      { label: "Pro Program", href: "#reviews" },
+      { label: "Patents", href: "#compare" },
+      { label: "Contact Us", href: "#support" },
+      { label: "Dealer Locator", href: "#support" },
+      { label: "Careers", href: "#support" },
+    ],
   },
   {
     title: "History",
-    links: ["Bike History", "Bike Archive", "Shipping / Returns"],
+    links: [
+      { label: "Bike History", href: "#overview" },
+      { label: "Bike Archive", href: "#overview" },
+      { label: "Shipping / Returns", href: "#support" },
+    ],
   },
 ];
 
 export function SiteFooter() {
   return (
-    <footer className="bg-ink text-white">
+    <footer id="support" className="bg-ink text-white">
       <div className="mx-auto max-w-[1440px] px-5 py-16 lg:px-10 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[2fr_3fr]">
           <div>
@@ -63,7 +85,7 @@ export function SiteFooter() {
               {SOCIAL_ICONS.map((icon) => (
                 <a
                   key={icon.label}
-                  href="#"
+                  href="#overview"
                   aria-label={icon.label}
                   className="transition-colors hover:text-white"
                 >
@@ -79,13 +101,13 @@ export function SiteFooter() {
               <div key={col.title}>
                 <h4 className="tracked-tagline text-xs text-white/50">{col.title}</h4>
                 <ul className="mt-5 space-y-3">
-                  {col.links.map((label) => (
-                    <li key={label}>
+                  {col.links.map((l) => (
+                    <li key={l.label}>
                       <Link
-                        href="#"
+                        href={l.href}
                         className="text-sm text-white/80 transition-colors hover:text-white"
                       >
-                        {label}
+                        {l.label}
                       </Link>
                     </li>
                   ))}
@@ -97,7 +119,7 @@ export function SiteFooter() {
         <div className="mt-16 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-white/10 pt-8 text-xs text-white/40">
           <p>© Wix Cycles 2026. A fictional demo brand — all rights reserved anyway.</p>
           {["Privacy Policy", "Terms of Use", "Accessibility", "Legal Notice"].map((label) => (
-            <Link key={label} href="#" className="transition-colors hover:text-white">
+            <Link key={label} href="#support" className="transition-colors hover:text-white">
               {label}
             </Link>
           ))}

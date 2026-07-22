@@ -115,7 +115,7 @@ export function Hero() {
   }, [scrollYProgress]);
 
   return (
-    <section ref={ref} className="relative h-[260vh] bg-black text-white">
+    <section ref={ref} id="overview" className="relative h-[260vh] bg-black text-white">
       <div className="sticky top-0 h-[100svh] overflow-hidden">
         <div ref={bgRef} className="absolute inset-0 will-change-[opacity,transform]">
           {wants3d && (

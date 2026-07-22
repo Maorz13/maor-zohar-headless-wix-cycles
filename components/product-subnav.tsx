@@ -6,7 +6,14 @@ import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const TABS = ["Overview", "Geometry", "Builds", "Compare", "Support", "Parts"];
+const TABS: { label: string; href: string }[] = [
+  { label: "Overview", href: "#overview" },
+  { label: "Geometry", href: "#geometry" },
+  { label: "Builds", href: "#kits" },
+  { label: "Compare", href: "#compare" },
+  { label: "Support", href: "#support" },
+  { label: "Parts", href: "#kits" },
+];
 
 /**
  * Sticky product bar that replaces the site header once the reader is past
@@ -34,31 +41,32 @@ export function ProductSubnav() {
           className="fixed inset-x-0 top-0 z-[60] border-b border-black/5 bg-white text-ink shadow-sm"
         >
           <div className="mx-auto flex h-14 max-w-[1600px] items-center gap-10 px-5 lg:px-10">
-            <a href="#" className="display-heading text-xl tracking-wide">
+            <a href="#overview" className="display-heading text-xl tracking-wide">
               WX140
             </a>
             <nav className="hidden items-center gap-8 md:flex">
               {TABS.map((tab, i) => (
-                <button
-                  key={tab}
+                <a
+                  key={tab.label}
+                  href={tab.href}
                   onClick={() => setActive(i)}
                   className={cn(
                     "relative py-1 text-[11px] font-bold uppercase tracking-[0.25em] transition-colors hover:text-ink",
                     active === i ? "text-ink" : "text-black/40"
                   )}
                 >
-                  {tab}
+                  {tab.label}
                   <span
                     className={cn(
                       "absolute inset-x-0 -bottom-0.5 h-0.5 bg-ink transition-transform duration-300",
                       active === i ? "scale-x-100" : "scale-x-0"
                     )}
                   />
-                </button>
+                </a>
               ))}
             </nav>
-            <Button variant="dark" size="sm" className="ml-auto px-7">
-              Buy
+            <Button variant="dark" size="sm" className="ml-auto px-7" asChild>
+              <a href="#kits">Buy</a>
             </Button>
           </div>
         </motion.div>

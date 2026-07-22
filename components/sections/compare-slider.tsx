@@ -36,7 +36,7 @@ export function CompareSlider() {
   }, [updateFromClientX]);
 
   return (
-    <section className="relative bg-ink py-16 lg:py-24">
+    <section id="compare" className="relative bg-ink py-16 lg:py-24">
       <SectionTag label="Features 02" />
       <Reveal amount={0.2}>
         <div className="mx-auto max-w-[1440px] px-5 lg:px-10">

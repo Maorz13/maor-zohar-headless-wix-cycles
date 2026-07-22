@@ -22,7 +22,7 @@ export function Geometry() {
   return (
     <>
       {/* Intro banner */}
-      <section className="relative flex min-h-[70svh] items-center overflow-hidden bg-ink text-white">
+      <section id="geometry" className="relative flex min-h-[70svh] items-center overflow-hidden bg-ink text-white">
         <Image
           src={sectionImages.massiveDays}
           alt="Alpine peaks rising above a sea of clouds"

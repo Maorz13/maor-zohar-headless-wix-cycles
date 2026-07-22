@@ -14,17 +14,12 @@ import {
   X,
 } from "lucide-react";
 
-import { bikeNav } from "@/lib/data";
+import { bikeNav, sectionNav } from "@/lib/data";
 import { useCart } from "@/lib/cart";
 import { cn } from "@/lib/utils";
 
-const NAV_ITEMS: { label: string; href: string }[] = [
-  { label: "Bikes", href: "#kits" },
-  { label: "Apparel", href: "#kits" },
-  { label: "Gear", href: "#kits" },
-  { label: "Stories", href: "#reviews" },
-  { label: "Demo", href: "#support" },
-];
+// The "Builds" item additionally hosts the bike-family mega menu on hover.
+const MEGA_MENU_ITEM = "Builds";
 
 /** Plain text logotype — inherits the header's current color */
 function WixCyclesLogo({ className }: { className?: string }) {
@@ -78,18 +73,18 @@ export function SiteHeader({ alwaysSolid = false }: { alwaysSolid?: boolean }) {
 
         {/* Centered nav */}
         <nav className="ml-14 hidden flex-1 items-center gap-9 lg:flex">
-          {NAV_ITEMS.map((item) => (
+          {sectionNav.map((item) => (
             <a
               key={item.label}
               href={item.href}
-              onMouseEnter={() => setOpenMenu(item.label === "Bikes" ? item.label : null)}
+              onMouseEnter={() => setOpenMenu(item.label === MEGA_MENU_ITEM ? item.label : null)}
               className={cn(
                 "group relative flex items-center gap-1 py-2 text-[13px] font-semibold uppercase tracking-[0.2em] transition-colors",
                 openMenu === item.label && "text-turq"
               )}
             >
               {item.label}
-              {item.label === "Bikes" && <ChevronDown className="size-3.5" />}
+              {item.label === MEGA_MENU_ITEM && <ChevronDown className="size-3.5" />}
               <span className="absolute inset-x-0 -bottom-0.5 h-0.5 origin-left scale-x-0 bg-current transition-transform duration-300 group-hover:scale-x-100" />
             </a>
           ))}
@@ -125,9 +120,9 @@ export function SiteHeader({ alwaysSolid = false }: { alwaysSolid?: boolean }) {
         </div>
       </div>
 
-      {/* Bikes mega menu — 0.4s ease-out entrance, 0.3s exit, like the reference nav-fade */}
+      {/* Bike-family mega menu — 0.4s ease-out entrance, 0.3s exit, like the reference nav-fade */}
       <AnimatePresence>
-        {openMenu === "Bikes" && (
+        {openMenu === MEGA_MENU_ITEM && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: 0.4, ease: "easeOut" } }}
@@ -203,7 +198,7 @@ export function SiteHeader({ alwaysSolid = false }: { alwaysSolid?: boolean }) {
             className="overflow-hidden bg-white text-ink lg:hidden"
           >
             <ul className="space-y-1 px-5 pb-6 pt-2">
-              {NAV_ITEMS.map((item) => (
+              {sectionNav.map((item) => (
                 <li key={item.label}>
                   <Link
                     href={item.href}

@@ -5,18 +5,10 @@ import Link from "next/link";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { ShoppingCart } from "lucide-react";
 
+import { sectionNav } from "@/lib/data";
 import { useCart } from "@/lib/cart";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
-const TABS: { label: string; href: string }[] = [
-  { label: "Overview", href: "#overview" },
-  { label: "Geometry", href: "#geometry" },
-  { label: "Builds", href: "#kits" },
-  { label: "Compare", href: "#compare" },
-  { label: "Support", href: "#support" },
-  { label: "Parts", href: "#kits" },
-];
 
 /**
  * Sticky product bar that replaces the site header once the reader is past
@@ -49,7 +41,7 @@ export function ProductSubnav() {
               WX140
             </a>
             <nav className="hidden items-center gap-8 md:flex">
-              {TABS.map((tab, i) => (
+              {sectionNav.map((tab, i) => (
                 <a
                   key={tab.label}
                   href={tab.href}

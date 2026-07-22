@@ -202,6 +202,20 @@ export const reviews: Review[] = [
   },
 ];
 
+/**
+ * Single source of truth for the one-page section navigation. Both the site
+ * header and the sticky product subnav render exactly this list so their
+ * menu items never drift apart.
+ */
+export const sectionNav: { label: string; href: string }[] = [
+  { label: "Overview", href: "#overview" },
+  { label: "Geometry", href: "#geometry" },
+  { label: "Builds", href: "#kits" },
+  { label: "Compare", href: "#compare" },
+  { label: "Support", href: "#support" },
+  { label: "Parts", href: "#kits" },
+];
+
 export type BikeNavItem = {
   name: string;
   travel: string;

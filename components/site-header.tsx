@@ -3,19 +3,11 @@
 import * as React from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
-import {
-  ChevronDown,
-  CircleUserRound,
-  HelpCircle,
-  MapPin,
-  Menu,
-  Search,
-  ShoppingCart,
-  X,
-} from "lucide-react";
+import { ChevronDown, Menu, ShoppingCart, X } from "lucide-react";
 
 import { bikeNav, sectionNav } from "@/lib/data";
 import { useCart } from "@/lib/cart";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 // The "Builds" item additionally hosts the bike-family mega menu on hover.
@@ -88,28 +80,24 @@ export function SiteHeader({ alwaysSolid = false }: { alwaysSolid?: boolean }) {
               <span className="absolute inset-x-0 -bottom-0.5 h-0.5 origin-left scale-x-0 bg-current transition-transform duration-300 group-hover:scale-x-100" />
             </a>
           ))}
-          <button aria-label="Search" className="transition-colors hover:text-turq">
-            <Search className="size-5" />
-          </button>
         </nav>
 
-        {/* Right icons: help, dealer locator, account, cart */}
-        <div className="ml-auto flex items-center gap-6 lg:gap-8">
-          <button aria-label="Help center" className="hidden transition-colors hover:text-turq lg:block">
-            <HelpCircle className="size-5" />
-          </button>
-          <button aria-label="Dealer locator" className="hidden transition-colors hover:text-turq lg:block">
-            <MapPin className="size-5" />
-          </button>
-          <button aria-label="Account" className="hidden transition-colors hover:text-turq lg:block">
-            <CircleUserRound className="size-5" />
-          </button>
+        {/* Right side mirrors the product subnav: cart + Buy */}
+        <div className="ml-auto flex items-center gap-6">
           <Link href="/cart" aria-label="Cart" className="relative transition-colors hover:text-turq">
             <ShoppingCart className="size-5" />
             <span className="absolute -right-2 -top-2 flex size-4 items-center justify-center rounded-full bg-turq text-[10px] font-bold text-white">
               {count}
             </span>
           </Link>
+          <Button
+            variant={light ? "outline" : "dark"}
+            size="sm"
+            className="hidden px-7 lg:inline-flex"
+            asChild
+          >
+            <a href="#kits">Buy</a>
+          </Button>
           <button
             aria-label="Menu"
             className="lg:hidden"

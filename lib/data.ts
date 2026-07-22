@@ -12,6 +12,8 @@ export type Kit = {
   price: string;
   spec: string;
   image: string;
+  /** Wix Stores product id — present once live store data is joined in. */
+  productId?: string;
 };
 
 const kitImg = (id: string) => img(id, "auto=format&fit=crop&w=772&h=1026&q=80");

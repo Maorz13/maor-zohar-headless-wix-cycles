@@ -6,12 +6,15 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { useWixKits } from "@/lib/wix";
+import { useCart } from "@/lib/cart";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
 import { cn } from "@/lib/utils";
 
 export function KitsCarousel() {
   const { kits } = useWixKits();
+  const { addToCart, busy } = useCart();
+  const [justAdded, setJustAdded] = React.useState<string | null>(null);
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     dragFree: true,
@@ -39,7 +42,7 @@ export function KitsCarousel() {
           <h2 className="display-heading text-4xl lg:text-5xl">
             WX140 <span className="text-black/40">Builds</span>
           </h2>
-          <a href="#" className="link-cta text-ink hover:text-turq">
+          <a href="#geometry" className="link-cta text-ink hover:text-turq">
             View Build Specs
           </a>
         </Reveal>
@@ -83,7 +86,18 @@ export function KitsCarousel() {
                 <p className="mt-3 line-clamp-4 flex-1 text-xs leading-relaxed text-black/60">
                   {kit.spec}
                 </p>
-                <Button className="mt-6 w-full">Configure &amp; Buy</Button>
+                <Button
+                  className="mt-6 w-full"
+                  disabled={!kit.productId || busy}
+                  onClick={async () => {
+                    if (!kit.productId) return;
+                    await addToCart(kit.productId);
+                    setJustAdded(kit.name);
+                    setTimeout(() => setJustAdded((v) => (v === kit.name ? null : v)), 2000);
+                  }}
+                >
+                  {justAdded === kit.name ? "Added to Cart ✓" : "Add to Cart"}
+                </Button>
               </article>
             ))}
             <div className="w-px shrink-0" />

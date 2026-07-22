@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Oswald, Inter } from "next/font/google";
 import "./globals.css";
 
+import { CartProvider } from "@/lib/cart";
+
 const display = Oswald({
   variable: "--font-display",
   subsets: ["latin"],
@@ -27,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${display.variable} ${body.variable} antialiased`}>
       <body className="min-h-screen flex flex-col bg-white text-ink">
-        {children}
+        <CartProvider>{children}</CartProvider>
       </body>
     </html>
   );

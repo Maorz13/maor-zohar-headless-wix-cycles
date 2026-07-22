@@ -15,9 +15,16 @@ import {
 } from "lucide-react";
 
 import { bikeNav } from "@/lib/data";
+import { useCart } from "@/lib/cart";
 import { cn } from "@/lib/utils";
 
-const NAV_ITEMS = ["Bikes", "Apparel", "Gear", "Stories", "Demo"];
+const NAV_ITEMS: { label: string; href: string }[] = [
+  { label: "Bikes", href: "#kits" },
+  { label: "Apparel", href: "#kits" },
+  { label: "Gear", href: "#kits" },
+  { label: "Stories", href: "#reviews" },
+  { label: "Demo", href: "#support" },
+];
 
 /** Plain text logotype — inherits the header's current color */
 function WixCyclesLogo({ className }: { className?: string }) {
@@ -32,7 +39,8 @@ function WixCyclesLogo({ className }: { className?: string }) {
   );
 }
 
-export function SiteHeader() {
+export function SiteHeader({ alwaysSolid = false }: { alwaysSolid?: boolean }) {
+  const { count } = useCart();
   const [hidden, setHidden] = React.useState(false);
   const [solid, setSolid] = React.useState(false);
   const [openMenu, setOpenMenu] = React.useState<string | null>(null);
@@ -51,7 +59,7 @@ export function SiteHeader() {
     });
   }, [scrollY, openMenu]);
 
-  const light = !solid && openMenu === null;
+  const light = !alwaysSolid && !solid && openMenu === null;
 
   return (
     <motion.header
@@ -64,25 +72,26 @@ export function SiteHeader() {
       )}
     >
       <div className="relative mx-auto flex h-16 max-w-[1600px] items-center px-5 lg:h-20 lg:px-14">
-        <Link href="#" className="shrink-0" aria-label="Home">
+        <Link href="#overview" className="shrink-0" aria-label="Home">
           <WixCyclesLogo />
         </Link>
 
         {/* Centered nav */}
         <nav className="ml-14 hidden flex-1 items-center gap-9 lg:flex">
           {NAV_ITEMS.map((item) => (
-            <button
-              key={item}
-              onMouseEnter={() => setOpenMenu(item === "Bikes" ? item : null)}
+            <a
+              key={item.label}
+              href={item.href}
+              onMouseEnter={() => setOpenMenu(item.label === "Bikes" ? item.label : null)}
               className={cn(
                 "group relative flex items-center gap-1 py-2 text-[13px] font-semibold uppercase tracking-[0.2em] transition-colors",
-                openMenu === item && "text-turq"
+                openMenu === item.label && "text-turq"
               )}
             >
-              {item}
-              {item === "Bikes" && <ChevronDown className="size-3.5" />}
-              <span className="absolute inset-x-0 -bottom-0.5 h-0.5 origin-left scale-x-0 bg-turq transition-transform duration-300 group-hover:scale-x-100" />
-            </button>
+              {item.label}
+              {item.label === "Bikes" && <ChevronDown className="size-3.5" />}
+              <span className="absolute inset-x-0 -bottom-0.5 h-0.5 origin-left scale-x-0 bg-current transition-transform duration-300 group-hover:scale-x-100" />
+            </a>
           ))}
           <button aria-label="Search" className="transition-colors hover:text-turq">
             <Search className="size-5" />
@@ -100,12 +109,12 @@ export function SiteHeader() {
           <button aria-label="Account" className="hidden transition-colors hover:text-turq lg:block">
             <CircleUserRound className="size-5" />
           </button>
-          <button aria-label="Cart" className="relative transition-colors hover:text-turq">
+          <Link href="/cart" aria-label="Cart" className="relative transition-colors hover:text-turq">
             <ShoppingCart className="size-5" />
             <span className="absolute -right-2 -top-2 flex size-4 items-center justify-center rounded-full bg-turq text-[10px] font-bold text-white">
-              0
+              {count}
             </span>
-          </button>
+          </Link>
           <button
             aria-label="Menu"
             className="lg:hidden"
@@ -136,7 +145,8 @@ export function SiteHeader() {
                   {bikeNav.map((bike) => (
                     <li key={bike.name}>
                       <Link
-                        href="#"
+                        href="#overview"
+                        onClick={() => setOpenMenu(null)}
                         className={cn(
                           "group grid grid-cols-[1fr_120px_120px] items-center border-b border-black/5 py-3 transition-colors hover:text-turq",
                           bike.name === "WX140" && "text-turq"
@@ -162,9 +172,18 @@ export function SiteHeader() {
                 </ul>
               </div>
               <div className="flex w-56 flex-col gap-5 border-l border-black/10 pl-10 pt-2">
-                {["Shop All Bikes", "Compare Models", "Bike Archive"].map((label) => (
-                  <Link key={label} href="#" className="link-cta text-ink hover:text-turq">
-                    {label}
+                {[
+                  { label: "Shop All Bikes", href: "#kits" },
+                  { label: "Compare Models", href: "#compare" },
+                  { label: "Bike Archive", href: "#support" },
+                ].map((l) => (
+                  <Link
+                    key={l.label}
+                    href={l.href}
+                    onClick={() => setOpenMenu(null)}
+                    className="link-cta text-ink hover:text-turq"
+                  >
+                    {l.label}
                   </Link>
                 ))}
               </div>
@@ -185,13 +204,13 @@ export function SiteHeader() {
           >
             <ul className="space-y-1 px-5 pb-6 pt-2">
               {NAV_ITEMS.map((item) => (
-                <li key={item}>
+                <li key={item.label}>
                   <Link
-                    href="#"
+                    href={item.href}
                     className="block border-b border-black/5 py-3 text-sm font-semibold uppercase tracking-[0.2em]"
                     onClick={() => setMobileOpen(false)}
                   >
-                    {item}
+                    {item.label}
                   </Link>
                 </li>
               ))}

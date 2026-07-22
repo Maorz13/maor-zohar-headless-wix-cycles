@@ -14,6 +14,8 @@
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
     "@wix/data": "^1.0.486",
+    "@wix/ecom": "^1.0.2289",
+    "@wix/redirects": "^1.0.122",
     "@wix/sdk": "^1.21.13",
     "@wix/stores": "^1.0.829",
     "class-variance-authority": "^0.7.1",

@@ -1,8 +1,11 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
+import { ShoppingCart } from "lucide-react";
 
+import { useCart } from "@/lib/cart";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -20,6 +23,7 @@ const TABS: { label: string; href: string }[] = [
  * the hero — model name left, section tabs center, BUY right.
  */
 export function ProductSubnav() {
+  const { count } = useCart();
   const [visible, setVisible] = React.useState(false);
   const [active, setActive] = React.useState(0);
   const { scrollY } = useScroll();
@@ -65,9 +69,21 @@ export function ProductSubnav() {
                 </a>
               ))}
             </nav>
-            <Button variant="dark" size="sm" className="ml-auto px-7" asChild>
-              <a href="#kits">Buy</a>
-            </Button>
+            <div className="ml-auto flex items-center gap-6">
+              <Link
+                href="/cart"
+                aria-label="Cart"
+                className="relative text-ink transition-colors hover:text-turq"
+              >
+                <ShoppingCart className="size-5" />
+                <span className="absolute -right-2 -top-2 flex size-4 items-center justify-center rounded-full bg-turq text-[10px] font-bold text-white">
+                  {count}
+                </span>
+              </Link>
+              <Button variant="dark" size="sm" className="px-7" asChild>
+                <a href="#kits">Buy</a>
+              </Button>
+            </div>
           </div>
         </motion.div>
       )}
